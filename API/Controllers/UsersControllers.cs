@@ -15,10 +15,10 @@ namespace API.Controllers
     public class UsersControllers : ControllerBase
     {
 
-        public DataContext dataContext { get; }
+        private readonly DataContext _dataContext;
         public UsersControllers(DataContext dataContext)
         {
-            this.dataContext = dataContext;
+            _dataContext = dataContext;
         }
 
         //We make the methods async to do the request multithread
@@ -28,7 +28,7 @@ namespace API.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<AppUser>>> GetUsers()
         {
-            return await dataContext.Users.ToListAsync();
+            return await _dataContext.Users.ToListAsync();
             
         }
 
@@ -37,7 +37,7 @@ namespace API.Controllers
         public async Task<ActionResult<AppUser>> GetUser(int id)
         {
             //Function to get entity by ID
-            var userItem = await dataContext.Users.FindAsync(id);
+            var userItem = await _dataContext.Users.FindAsync(id);
             if(userItem == null){
                 return NotFound();
             }
@@ -50,8 +50,8 @@ namespace API.Controllers
         public async Task<ActionResult<AppUser>> addUser(AppUser appUser){
 
             //Add and save
-            await dataContext.Users.AddAsync(appUser);
-            await dataContext.SaveChangesAsync();
+            await _dataContext.Users.AddAsync(appUser);
+            await _dataContext.SaveChangesAsync();
 
             //This returns a StatusCodes.Status201Created response
             return CreatedAtAction(nameof(GetUser), new {id = appUser.Id}, appUser);
