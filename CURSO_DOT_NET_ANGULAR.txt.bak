@@ -18,26 +18,3 @@ En este caso usaremos el webAPI
 
 5. Crea la base de datos
 
-- dotnet ef database update
-
-
-6. creamos un archivo .git
-
-- git init
-- dotnet new gitignore
-
-7. installar angular 
-
-- npm install -g @angular/cli@12
-
-8. creamos cliente
-
-- ng new client --strict false
-
-9. ejecutamos el cliente
-
-- cd client
-- ng serve
-
-
-
