@@ -1,0 +1,20 @@
+1. Create a config file (sln)
+container for a project
+- dotnet new sln
+
+2. Creamos el template
+En este caso usaremos el webAPI
+
+- dotnet new webapi -o API
+
+3. Agregamos a la solucion
+
+- dotnet sln add API
+
+4. Crea las clases de levantamientos de tablas
+
+- dotnet ef migrations add InitialCreate -o Data/Migrations
+
+
+5. Crea la base de datos
+
