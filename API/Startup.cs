@@ -21,14 +21,17 @@ namespace API
 
         //vars
         private readonly IConfiguration _config;
+        private IWebHostEnvironment _env;
 
-        public Startup(IConfiguration config)
+        public Startup(IConfiguration config, IWebHostEnvironment env)
         {
             _config = config;
-            
+            _env = env;
+
+
         }
 
-        
+
 
 
         // This method gets called by the runtime. Use this method to add services to the container.
@@ -36,7 +39,8 @@ namespace API
         {
 
             //Add the dbContext
-            services.AddDbContext<DataContext>(options => {
+            services.AddDbContext<DataContext>(options =>
+            {
                 options.UseSqlite(_config.GetConnectionString("DefaultConnection"));
             });
 
@@ -45,18 +49,40 @@ namespace API
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "WebAPIv5", Version = "v1" });
             });
+            if (_env.IsDevelopment())
+            {
+                services.AddCors(options =>
+                {
+                    options.AddPolicy("AllowAll",
+                              p => p.AllowAnyOrigin()
+                                    .AllowAnyHeader()
+                                    .AllowAnyMethod()
+                                    .AllowCredentials());
+                });
+            }
+
+
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            //CORS ALWAYS HAVE TO BE BETWEEN UseRouting AND UseAuthorization
+            //Middleware
+
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "WebAPIv5 v1"));
             }
-
+            app.UseMvc();
+            if (_env.IsDevelopment())
+            {
+                app.UseCors("AllowAll");
+            }
             app.UseHttpsRedirection();
 
             app.UseRouting();
