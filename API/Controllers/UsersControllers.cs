@@ -24,7 +24,6 @@ namespace API.Controllers
         //We make the methods async to do the request multithread
         //
         // GET PETITONS
-        [Microsoft.AspNetCore.Cors.EnableCors("default")]
         [HttpGet]
         public async Task<ActionResult<IEnumerable<AppUser>>> GetUsers()
         {
@@ -48,7 +47,6 @@ namespace API.Controllers
 
 
         // POST PETITION
-        [Microsoft.AspNetCore.Cors.EnableCors("default")]
         [HttpPost]
         public async Task<ActionResult<AppUser>> AddUser(AppUser appUser)
         {
@@ -66,7 +64,6 @@ namespace API.Controllers
         // PUT PETITION
         // With PUT method we have to send again all the properties of the entity
         // If we just want to update an specific property we have to user PATCH method
-        [Microsoft.AspNetCore.Cors.EnableCors("default")]
         [HttpPut("{id}")]
         public async Task<ActionResult<AppUser>> UpdateUser(int id, AppUser appUser)
         {
@@ -87,7 +84,6 @@ namespace API.Controllers
 
 
         //PETITION TO DELETE BY ID
-        [Microsoft.AspNetCore.Cors.EnableCors("default")]
         [HttpDelete]
         public async Task<IActionResult> DeleteUser(int id)
         {

@@ -1,1 +1,8 @@
 <h1> {{title}}</h1>
+<!---
+Properties in angular are case sensitive, but the first one have to be in min
+camelCase
+--->
+<ul>
+    <li *ngFor="let user of users">{{user.id}} - {{user.name}} - {{user.lastName}} - {{user.idUser}}</li>
+</ul>

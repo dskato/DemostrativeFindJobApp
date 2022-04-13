@@ -39,5 +39,12 @@ En este caso usaremos el webAPI
 - cd client
 - ng serve
 
+10. Instalar ngx bootstrap
+
+- ng add ngx-bootstrap
+
+11. Instalar iconos
+
+- npm install font-awesome
 
 
