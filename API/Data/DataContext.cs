@@ -16,6 +16,7 @@ namespace API.Data
     
     //Create a table for the list of users
     public DbSet<AppUser> Users { get; set; }
+    
 
     }
 }

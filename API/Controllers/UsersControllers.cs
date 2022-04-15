@@ -4,15 +4,15 @@ using System.Linq;
 using System.Threading.Tasks;
 using API.Data;
 using API.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace API.Controllers
 {
 
-    [ApiController]
-    [Route("api/[controller]")]
-    public class UsersControllers : ControllerBase
+
+    public class UsersControllers : BaseApiController
     {
 
         private readonly DataContext _dataContext;
@@ -24,6 +24,7 @@ namespace API.Controllers
         //We make the methods async to do the request multithread
         //
         // GET PETITONS
+        [AllowAnonymous]
         [HttpGet]
         public async Task<ActionResult<IEnumerable<AppUser>>> GetUsers()
         {
@@ -32,7 +33,7 @@ namespace API.Controllers
         }
 
         //Get user by id - 
-        [Microsoft.AspNetCore.Cors.EnableCors("default")]
+        [Authorize]
         [HttpGet("{id}")]
         public async Task<ActionResult<AppUser>> GetUser(int id)
         {
@@ -45,7 +46,7 @@ namespace API.Controllers
             return userItem;
         }
 
-
+        /*
         // POST PETITION
         [HttpPost]
         public async Task<ActionResult<AppUser>> AddUser(AppUser appUser)
@@ -103,6 +104,6 @@ namespace API.Controllers
             return NoContent();
 
         }
-
+*/
     }
 }

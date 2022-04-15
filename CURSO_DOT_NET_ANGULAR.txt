@@ -47,4 +47,13 @@ En este caso usaremos el webAPI
 
 - npm install font-awesome
 
+12. Borrar database
+
+- dotnet ef database drop 
+
+13. instalamos desde nuget Tokens.JWT
+
+14. Agregamos el tokenKey en el appsettings.json en nuestro caso en el de development, no habra problema mientras no sea en el normal
+
+15. Instalamos el middleware - Microsoft.AspNetCore.Authentication.JwtBearer 
 
